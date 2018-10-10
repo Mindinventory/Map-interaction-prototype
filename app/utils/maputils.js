@@ -10,7 +10,7 @@ import {
     ScrollView
 } from 'react-native';
 
-const GOOGLE_MAPS_APIKEY = 'AIzaSyBK2aP_D6peqMMj9CV_l4K07mqw_XDqRlQ';
+export const GOOGLE_MAPS_APIKEY = 'AIzaSyCx60-3gx-i-UgRKTSErDhX7ZEmvb_yo5c';
 
 export const MapScreenstyles = StyleSheet.create({
 

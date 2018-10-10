@@ -31,13 +31,10 @@ import * as maputil from "../../app/utils/maputils";
 
 
 const ic_action_back = require('../resource/images/ic_action_back.png');
-// const ic_action_back = require('../app/resource/images/ic_action_back.png');
-// const direction_start = require('app/resource/images/direction_start.png');
 
 let mapintegration = null;
 
 const {width, height} = Dimensions.get('window');
-const GOOGLE_MAPS_APIKEY = 'AIzaSyCx60-3gx-i-UgRKTSErDhX7ZEmvb_yo5c';
 const ASPECT_RATIO = width / height;
 // Mindinventory  23.0575869,72.532264
 const LATITUDE = 23.0575869;
@@ -188,7 +185,7 @@ class MapIntegration extends React.Component {
                             latitude: this.state.latitudeDestination,
                             longitude: this.state.longitudeDestination
                         }}
-                        apikey={GOOGLE_MAPS_APIKEY}
+                        apikey={maputil.GOOGLE_MAPS_APIKEY}
                         strokeWidth={3}
                         strokeColor="#FC2681"
 
