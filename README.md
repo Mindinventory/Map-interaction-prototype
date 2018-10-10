@@ -4,11 +4,8 @@ Map interaction for a mobile app to find what’s nearby ,
 made with React Native.
 
 
-Check it out on Béhance (https://www.behance.net/gallery/68043143/Tab-bar-interaction-with-animated-icons)
+Check it out on Dribbble (https://dribbble.com/shots/4984844-Map-interaction-prototype)
 
-Check it out on Dribbble (https://dribbble.com/shots/4844696-Tab-bar-interaction-with-animated-icons)
-
-Read about how we made this on our blog (https://www.mindinventory.com/blog/create-tabbar-plugin-with-react-native/)
 
 ![image](/screenshot/preview.gif)
 
@@ -76,7 +73,10 @@ import TabBar from "react-native-tab-bar-interaction";
 
 ## Dependencies
 
-* `react-native-svg`
+* `geolib`
+* `react-native-linear-gradient`
+* `react-native-maps`
+* `react-native-maps-directions`
 
 
 # Changelog
@@ -89,7 +89,7 @@ import TabBar from "react-native-tab-bar-interaction";
 
 # LICENSE!
 
-React-native-tabbar-interaction is [MIT-licensed](https://github.com/Mindinventory/react-native-tabbar-interaction/blob/master/LICENSE).
+Map interaction prototype is [MIT-licensed](https://github.com/Mindinventory/react-native-tabbar-interaction/blob/master/LICENSE).
 
 # Let us know!
 We’d be really happy if you send us links to your projects where you use our component. Just send an email to sales@mindinventory.com And do let us know if you have any questions or suggestion regarding our work.
