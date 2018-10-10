@@ -14,7 +14,8 @@
         <!-- You will only need to add this meta-data tag, but make sure it's a child of application -->
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
-                android:value="AIzaSyBK2aP_D6peqMMj9CV_l4K07mqw_XDqRlQ"/>
+                android:value="AIzaSyC#######################"/>
+        <!--Replace this key with your google map key-->
 
       <activity
         android:name=".MainActivity"

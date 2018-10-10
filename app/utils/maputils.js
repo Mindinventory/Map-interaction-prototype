@@ -10,7 +10,8 @@ import {
     ScrollView
 } from 'react-native';
 
-export const GOOGLE_MAPS_APIKEY = 'AIzaSyCx60-3gx-i-UgRKTSErDhX7ZEmvb_yo5c';
+export const GOOGLE_MAPS_APIKEY = 'AIzaSyC#######################';
+//Replace this key with your google map key.
 
 export const MapScreenstyles = StyleSheet.create({
 
