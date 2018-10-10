@@ -8,7 +8,9 @@ import {
     TouchableOpacity,
     Platform,
     ScrollView,
-    StatusBar
+    StatusBar,
+    FlatList,
+    TouchableHighlight,
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
@@ -37,24 +39,25 @@ let mapintegration = null;
 const {width, height} = Dimensions.get('window');
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCx60-3gx-i-UgRKTSErDhX7ZEmvb_yo5c';
 const ASPECT_RATIO = width / height;
-// 40.6341651,-73.964645
-const LATITUDE = 40.6341651;
-const LONGITUDE = -73.964645;
+// Mindinventory  23.0575869,72.532264
+const LATITUDE = 23.0575869;
+const LONGITUDE = 72.532264;
 const LATITUDE_DELTA = 1.5;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-//40.657314,-73.98085
-const LATITUDE_DEST1 = 40.657314;
-const LONGITUDE_DEST1 = -73.98085;
+//23.0626524,72.537905
+const LATITUDE_DEST1 = 23.0620415;
+const LONGITUDE_DEST1 = 72.532932;
 
-//40.663575,-73.955214
-const LATITUDE_DEST2 = 40.663575;
-const LONGITUDE_DEST2 = -73.955214;
+//23.0585811,72.5391927
+const LATITUDE_DEST2 = 23.0585811;
+const LONGITUDE_DEST2 = 72.5391927;
 
 class MapIntegration extends React.Component {
 
     constructor(props) {
         super(props);
+
         mapintegration = this;
         this.state = {
             region: {
@@ -222,18 +225,87 @@ class MapIntegration extends React.Component {
 
                 <MapHeader/>
 
-                <TouchableOpacity
-                    onPress={() => this.animateToRandomBearing()
-                    }
-                    style={maputil.MapScreenstyles.BottomContainer}
+                <View style={{
+                    width: '100%',
+                    height: 160,
+                }}>
 
-                >
+                  {/*  <TouchableOpacity
+                        onPress={() => this.animateToRandomBearing()
+                        }
+                        style={maputil.MapScreenstyles.BottomContainer}
 
-                    <Text style={{color: '#000000'}}>Animate (Bearing)</Text>
+                    >
 
-                </TouchableOpacity>
+                        <Text style={{color: '#000000'}}>Animate (Bearing)</Text>
+
+                    </TouchableOpacity>*/}
+
+                    <FlatList
+                        initialNumToRender={2}
+                        refreshing={this.state.refreshing}
+                        onEndReachedThreshold={0.0001}
+                        pagingEnabled
+                        // onLayout={
+                        //     this.adjustPageSize
+                        // }
+
+                        onEndReached={({ distanceFromEnd }) => {
+                            // Alert.alert('omm \(distanceFromEnd)');
+                            // this.adjustPageSize
+                            console.log('on end reached ', distanceFromEnd);
+                        }}
+                        onViewableItemsChanged={
+                            this.adjustPageSize
+                        }
+                        directionalLockEnabled
+                        data={[{name: 'Nauti Grind New Restaurant'},
+                            {name: 'Le Dinner Bell'}]}
+                        // numColumns={self.count}
+                        horizontal
+
+                        style = {{maxHeight: 100 , marginBottom : 10 , width : Dimensions.get('window').width *1  , overflow: 'visible' , right: 0 , alignSelf: 'flex-start'}}
+
+                        // initialScrollIndex={2}
+                        renderItem={({item}) => <MyCell displayData = {item.name} displayData1 = ""/>}
+                        // extraData = {this.state}
+                        keyExtractor={(item) => item.name}
+                    />
 
 
+
+                    <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        width: '100%',
+                        height: 40,
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        backgroundColor: '#111144'
+                    }}>
+
+
+                        <Image
+                            style={maputil.MapScreenstyles.tabicon}
+                            source={require('../resource/images/ic_search_active.png')}
+                            resizeMode='center'/>
+                        <Image
+                            style={maputil.MapScreenstyles.tabicon}
+                            source={require('../resource/images/ic_form.png')}
+                            resizeMode='center'/>
+                        <Image
+                            style={maputil.MapScreenstyles.tabicon}
+                            source={require('../resource/images/ic_like.png')}
+                            resizeMode='center'/>
+                        <Image
+                            style={maputil.MapScreenstyles.tabicon}
+                            source={require('../resource/images/ic_user.png')}
+                            resizeMode='center'/>
+
+
+                    </View>
+
+                </View>
             </View>
         )
     }
@@ -302,16 +374,15 @@ class MapHeader extends React.Component {
                     <View style={{
                         flexDirection: 'row',
                         justifyContent: 'flex-start',
-                        padding: 10,
-                        alignItems: 'flex-start',
+                        alignItems: 'center',
+                        marginLeft: -10,
                         opacity: 0.6
                     }}>
 
-                        <Image source={ic_action_back}
+                        <Image source={require('../resource/images/ic_location.png')}
                                resizeMode='center'/>
 
                         <Text style={{
-                            textAlign: 'center',
                             color: '#FFFFFF'
                         }}>3164, Anthony Avenue</Text>
 
@@ -322,6 +393,55 @@ class MapHeader extends React.Component {
             </LinearGradient>
 
         )
+    }
+
+}
+
+class MyCell extends React.Component{
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            displayData: this.props.displayData,
+            displayData1: this.props.displayData1,
+        }
+    }
+    _pressRow = (rowID: number) => {
+        console.log("clicked")
+        mapintegration.animateToRandomBearing()
+    }
+    render(){
+        let displayTExt = this.state.displayData1 + this.state.displayData
+
+        return(
+            <View style={maputil.MapScreenstyles.outerView}>
+
+                <TouchableHighlight style={maputil.MapScreenstyles.innerView} onPress={() => this._pressRow()}>
+
+                    <View  style={maputil.MapScreenstyles.innerView} >
+                        <Image
+                            style={{width: 100, height: this.props.height , overflow: 'hidden'}}
+                            source={{uri: 'https://image3.mouthshut.com/images/imagesp/925042418s.jpg'}}
+                        />
+
+                        <View style={{ flex: 1 , marginBottom : 0 ,marginRight: 10  , marginLeft: 10 ,}}>
+
+                            <Text style={{ flexDirection:'row' , top : 10, fontWeight: 'bold' , height: '50%',
+                                fontSize: 20,
+                                color: '#050530',
+                                fontFamily: 'Roboto',}}>{displayTExt}</Text>
+
+                            <View style={{height: '50%'}}>
+                                {/*<Star score={4} style={starStyle} />*/}
+                                <Text style={{top: 2 , color: "#4C4A91",}}>306 Review</Text>
+                            </View>
+
+                        </View>
+                    </View>
+                </TouchableHighlight>
+
+            </View>
+        );
     }
 
 }

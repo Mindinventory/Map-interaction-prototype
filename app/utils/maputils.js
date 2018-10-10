@@ -14,6 +14,10 @@ const GOOGLE_MAPS_APIKEY = 'AIzaSyBK2aP_D6peqMMj9CV_l4K07mqw_XDqRlQ';
 
 export const MapScreenstyles = StyleSheet.create({
 
+    tabicon:{
+        flex: 1,
+    },
+
         contentContainer: {
             height: '100%',
             width: '100%',
@@ -30,12 +34,35 @@ export const MapScreenstyles = StyleSheet.create({
             marginLeft: 20,
             marginRight: 20,
             marginBottom: 20,
-            width: 350,
-            height: '15%',
+            width: '80%',
+            height:130,
             flexDirection: 'column',
             backgroundColor: 'rgba(255,255,255,0.9)',
             borderRadius: 20,
         },
+    outerView: {
+        // marginTop: Dimensions.get('window').height - 120,
+        height : 100,
+
+
+        marginLeft: 10,
+        marginRight: 10,
+
+        width: Dimensions.get('window').width * 1 -20,
+        // paddingLeft: 10
+    },
+
+    innerView: {
+        // justifyContent: 'flex-end',
+        backgroundColor: '#F0F1F2',
+        borderRadius: 10,
+        overflow: 'hidden',
+        width: '100%',
+        flex: 1,
+        flexDirection: 'row',
+
+        // paddingVertical: 10,
+    }
 
     }
 );
