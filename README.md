@@ -22,9 +22,10 @@ iPhone: `react-native run-ios`
 
 # Usage
 
-  Create your project on google ([Here](https://console.cloud.google.com/home/dashboard))
+  Create your project on google console ([Here](https://console.cloud.google.com/home/dashboard)).
   And enable below APIs
-  * Map API
+  
+  * Google Map API
   * Directions API 
   
 
