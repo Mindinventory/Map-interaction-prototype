@@ -1,7 +1,7 @@
 # Map interaction prototype
 
-Map interaction for a mobile app to find what’s nearby ,
-made with React Native.
+Map interaction for a mobile app,
+made this sample app with React Native.
 
 
 Check it out on Dribbble (https://dribbble.com/shots/4984844-Map-interaction-prototype)
@@ -11,75 +11,55 @@ Check it out on Dribbble (https://dribbble.com/shots/4984844-Map-interaction-pro
 
 
 # Installation
-`npm i mindinventory/react-native-tab-bar-interaction`
+
 
 Android: `react-native run-android`
 
 iPhone: `react-native run-ios`
 
 
+
+
 # Usage
 
-```js
+  Create your project on google ([Here](https://console.cloud.google.com/home/dashboard))
+  And enable below APIs
+  * Map API
+  * Directions API 
+  
 
-import TabBar from "react-native-tab-bar-interaction";
-...
-  render() {
-      return (
-          <TabBar>
-            <TabBar.Item
-                icon={require('./tab1.png')}
-                selectedIcon={require('./tab1.png')}
-                title="Tab1"
-                screenBackgroundColor={{ backgroundColor: '#008080' }}
-            >
-              <View>
-                  {/*Page Content*/}
-              </View>
-            </TabBar.Item>
-            <TabBar.Item
-                icon={require('./tab2.png')}
-                selectedIcon={require('./tab1.png')}
-                title="Tab2"
-                screenBackgroundColor={{ backgroundColor: '#F08080' }}
-            >
-                <View>
-                    {/*Page Content*/}
-                </View>
-            </TabBar.Item>
-            <TabBar.Item
-                icon={require('./tab3.png')}
-                selectedIcon={require('./tab1.png')}
-                title="Tab3"
-                screenBackgroundColor={{ backgroundColor: '#485d72' }}
-            >
-              <View>
-                  {/*Page Content*/}
-              </View>
-            </TabBar.Item>
-          </TabBar>
-      );
-    }
+## Android
+
+  Create API Key from credentials. and put it in code as below to access google map.
+  
+```js
+Add your API key to your manifest file (android/app/src/main/AndroidManifest.xml):
+
+<application>
+   <!-- You will only need to add this meta-data tag, but make sure it's a child of application -->
+   <meta-data
+     android:name="com.google.android.geo.API_KEY"
+     android:value="Your Google maps API Key Here"/>
+</application>
+
 ```
 
-## Component props
+## iOS
 
-| prop | value | required/optional | description |
-| --- | --- | --- | --- |
-| icon | image source | required | the icon when item is not focus |
-| selectedIcon | image source | required | the icon when item is focus |
-| title | string | required | title of item |
-| screenBackgroundColor | string | required | background color of tab |
+```js
+dd to `ios/YOUR_PROJECT_NAME/AppDelegate.m:
 
-## Dependencies
++ #import <GoogleMaps/GoogleMaps.h>
 
-* `geolib`
-* `react-native-linear-gradient`
-* `react-native-maps`
-* `react-native-maps-directions`
+@implementation AppDelegate
+...
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
++  [GMSServices provideAPIKey:@"_YOUR_API_KEY_"]; // add this line using the api key obtained from Google Console
+```
 
 
-# Changelog
 
 ### Version: 1.0
 
