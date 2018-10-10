@@ -7,22 +7,13 @@ import {
     Image,
     TouchableOpacity,
     Platform,
-    ScrollView, StatusBar
+    ScrollView
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 import geolib from 'geolib';
 
-import MapView, {
-    MAP_TYPES,
-    ProviderPropType,
-    Polyline,
-    Marker,
-    Polygon,
-    Overlay,
-    Circle,
-    AnimatedRegion
-} from 'react-native-maps';
+import MapView, {MAP_TYPES, ProviderPropType, Polyline, Marker, Polygon, Overlay, Circle, AnimatedRegion} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 // import LinearGradient from 'react-native-linear-gradient';
 
@@ -38,7 +29,7 @@ const ASPECT_RATIO = width / height;
 const LATITUDE = 40.6341651;
 const LONGITUDE = -73.964645;
 const LATITUDE_DELTA = 1.5;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+const LONGITUDE_DELTA =LATITUDE_DELTA * ASPECT_RATIO;
 
 //40.657314,-73.98085
 const LATITUDE_DEST1 = 40.657314;
@@ -437,7 +428,7 @@ const customStyle = [
     }
 ];
 
-const GOOGLE_MAPS_APIKEY = 'AIzaSyCx60-3gx-i-UgRKTSErDhX7ZEmvb_yo5c';
+const GOOGLE_MAPS_APIKEY = 'AIzaSyBK2aP_D6peqMMj9CV_l4K07mqw_XDqRlQ';
 
 let mapStyle = null;
 
@@ -457,53 +448,82 @@ class MapStyle extends React.Component {
                 latitude: LATITUDE_DEST1,
                 longitude: LONGITUDE_DEST1,
             }),
-            latitudeDestination: LATITUDE_DEST1,
-            longitudeDestination: LONGITUDE_DEST1,
+            latitudeDestination:LATITUDE_DEST1,
+            longitudeDestination:LONGITUDE_DEST1,
         };
     }
 
     onRegionChange(region) {
-        this.setState({region});
+        this.setState({ region });
     }
 
     animateToRandomBearing() {
-        this.map.animateToBearing(this.getBearingFromLocation(), 700);
+        this.map.animateToBearing(this.getRandomFloat(), 700);
     }
 
-    getBearingFromLocation() {
+    getRandomFloat() {
 
-        if (this.state.latitudeDestination !== LATITUDE_DEST1) {
+        // let b = 0.0;
+        if (this.state.latitudeDestination !== LATITUDE_DEST1)
+        {
             this.setState({
 
-                latitudeDestination: LATITUDE_DEST1,
-                longitudeDestination: LONGITUDE_DEST1
+                latitudeDestination : LATITUDE_DEST1,
+                longitudeDestination : LONGITUDE_DEST1
             })
         }
         else {
             this.setState({
 
-                latitudeDestination: LATITUDE_DEST2,
-                longitudeDestination: LONGITUDE_DEST2
+                latitudeDestination : LATITUDE_DEST2,
+                longitudeDestination : LONGITUDE_DEST2
             })
+            // this.state.latitudeDestination = LATITUDE_DEST2;
+            // this.state.longitudeDestination = LONGITUDE_DEST2;
         }
 
-        let bearing = geolib.getBearing(
+        let b = geolib.getBearing(
+            // {latitude: LATITUDE_DEST1, longitude: LONGITUDE_DEST1},
+            // {latitude: LATITUDE_DEST2, longitude: LONGITUDE_DEST2}
             {latitude: LATITUDE, longitude: LONGITUDE},
             {latitude: this.state.latitudeDestination, longitude: this.state.longitudeDestination}
         );
 
         this.animate();
 
-        return bearing;
+        // this.b = ~(this.b)
+
+        // if (this.b < 0)
+       /* if (this.state.latitudeDestination !== LATITUDE_DEST1)
+        {
+            this.state.latitudeDestination = LATITUDE_DEST1;
+            this.state.longitudeDestination = LONGITUDE_DEST1;
+        }
+        else {
+            this.state.latitudeDestination = LATITUDE_DEST2;
+            this.state.longitudeDestination = LONGITUDE_DEST2;
+        }*/
+
+        console.log(""+~(b));
+        return b;//(Math.random() * (max - min)) + min;
+    }
+
+    randomCoordinate() {
+        const region = this.state.region;
+        return {
+            latitude: region.latitude + ((Math.random() - 0.5) * (region.latitudeDelta / 2)),
+            longitude: region.longitude + ((Math.random() - 0.5) * (region.longitudeDelta / 2)),
+        };
     }
 
 
+
     animate() {
-        const {coordinate} = this.state;
+        const { coordinate } = this.state;
         const newCoordinate = {
             // latitude: LATITUDE + ((Math.random() - 0.5) * (LATITUDE_DELTA / 2)),
             // longitude: LONGITUDE + ((Math.random() - 0.5) * (LONGITUDE_DELTA / 2)),
-            latitude: ((mapStyle.state.latitudeDestination)),
+            latitude: ((mapStyle.state.latitudeDestination) ),
             longitude: ((mapStyle.state.longitudeDestination)),
         };
 
@@ -521,9 +541,7 @@ class MapStyle extends React.Component {
             <View style={styles.container}>
                 <MapView
 
-                    ref={ref => {
-                        this.map = ref;
-                    }}
+                    ref={ref => { this.map = ref; }}
                     provider={this.props.provider}
                     style={styles.map}
                     followsUserLocation={false}
@@ -540,7 +558,7 @@ class MapStyle extends React.Component {
                 >
 
 
-                    {/*   <Polyline
+                 {/*   <Polyline
                         coordinates={[
                             { latitude:LATITUDE, longitude: LONGITUDE },
                             // { latitude: 37.7896386, longitude: -122.421646 },
@@ -574,11 +592,8 @@ class MapStyle extends React.Component {
 
                     <MapViewDirections
                         origin={{latitude: LATITUDE, longitude: LONGITUDE}}
-                        destination={{
-                            latitude: this.state.latitudeDestination,
-                            longitude: this.state.longitudeDestination
-                        }}
-                        apikey={GOOGLE_MAPS_APIKEY}
+                        destination={{latitude: this.state.latitudeDestination, longitude: this.state.longitudeDestination}}
+                        apikey={"AIzaSyCx60-3gx-i-UgRKTSErDhX7ZEmvb_yo5c"}
                         strokeWidth={3}
                         strokeColor="#FC2681"
 
@@ -589,9 +604,9 @@ class MapStyle extends React.Component {
                             this.map.fitToCoordinates(result.coordinates, {
                                 edgePadding: {
                                     right: 160,
-                                    bottom: 500,
+                                    bottom: 460,
                                     left: 160,
-                                    top: 900,
+                                    top: 460,
                                 }
                             });
                         }}
@@ -600,12 +615,12 @@ class MapStyle extends React.Component {
                         }}
                     />
 
-                    {/*   <Marker
+                 {/*   <Marker
                         coordinate={ { latitude: 37.8025259, longitude: -122.4351431 }}
                         image={direction_start}
                     />*/}
 
-                    {/*    <Marker.Animated
+                {/*    <Marker.Animated
                         ref={marker => { this.marker = marker; }}
                         coordinate={this.state.coordinate}
                     />*/}
@@ -619,8 +634,44 @@ class MapStyle extends React.Component {
                     height: '100%',
                     justifyContent: 'space-between',
                 }}>
+                    <LinearGradient colors={['#8301FF', '#30ACFF']}
+                                    start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
+                                    style={styles.linearGradient}>
 
-                    <MapHeader/>
+
+                        <View style={{
+                            height: 56,
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                        }}>
+
+                            <Image source={ic_action_back} resizeMode='contain' style={{
+                                width: 40,
+                                height: 56,
+                            }}
+
+                            />
+                            <Text style={styles.buttonText}>SEE ALL
+                            </Text>
+
+                        </View>
+
+                        <View style={styles.buttonContainer}>
+                            <TouchableOpacity
+                                onPress={() => this.animate()}
+                                style={[styles.bubble, styles.button]}
+                            >
+                                <Text>Animate</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </LinearGradient>
+
+
+                   {/* <View style={styles.BottomContainer} >
+
+                    </View>
+*/}
 
                     <TouchableOpacity
                         onPress={() => this.animateToRandomBearing()
@@ -629,91 +680,21 @@ class MapStyle extends React.Component {
 
                     >
 
+                        <Text style={{ textAlign: 'center' }}>
+                            {this.state.region.latitude.toPrecision(7)},
+                            {this.state.region.longitude.toPrecision(7)}
+                        </Text>
                         <Text style={{color: '#000000'}}>Animate (Bearing)</Text>
-
                     </TouchableOpacity>
 
 
                 </View>
 
 
+
             </View>
         );
     }
-}
-
-
-class MapHeader extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <LinearGradient colors={['#8301FF', '#30ACFF']}
-                            start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
-                            style={{
-                                height: 200, width: '100%',
-                                borderBottomLeftRadius: 16,
-                                borderBottomRightRadius: 16,
-                                paddingBottom: 8
-                            }}
-            >
-                <StatusBar
-                    backgroundColor="#00000000"
-                    barStyle="default"
-                    translucent={true}
-                />
-                <View style={{
-                    paddingTop: 24,
-                    width: '100%',
-                    alignItems: 'center',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                }}>
-
-                    <Image source={ic_action_back}
-                           resizeMode='center'
-                    />
-
-                    <Text style={{
-                        textAlign: 'center',
-                        paddingLeft: 20,
-                        paddingRight: 20,
-                        color: '#FFFFFF'
-                    }}>SEE ALL</Text>
-
-                </View>
-                <View style={{
-                    flex: 1,
-                    justifyContent: 'flex-end',
-                    padding: 10,
-                    alignItems: 'flex-start',
-                }}>
-                    <Text style={{
-                        textAlign: 'center',
-                        color: '#FFFFFF',
-                        opacity: 0.6
-                    }}>Restaurants</Text>
-                    <Text style={{
-                        textAlign: 'center',
-                        fontSize: 30,
-                        fontFamily: 'Roboto',
-                        color: '#FFFFFF'
-                    }}>Brooklyn</Text>
-                    <Text style={{
-                        textAlign: 'center',
-                        color: '#FFFFFF',
-                        opacity: 0.6
-                    }}>3164, Anthony Avenue</Text>
-                </View>
-
-            </LinearGradient>
-
-        )
-    }
-
 }
 
 MapStyle.propTypes = {
@@ -764,7 +745,6 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 18,
         fontFamily: 'Gill Sans',
-        fontWeight: 'normal',
         textAlign: 'center',
         margin: 10,
         color: '#ffffff',
