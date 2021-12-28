@@ -1,0 +1,15 @@
+export const palette = {
+  pink: '#FC2681',
+  black: '#000000',
+  white: '#FFFFFF',
+  porcelain: '#F0F1F2',
+  deepCove: '#050530',
+  victoria: '#4C4A91',
+  bunting: '#111144',
+  martinique: '#34334F',
+  ebonyClay: '#2d2c45',
+  waterloo: '#7d7c9b',
+  red: '#ff0000',
+  violet: '#8301FF',
+  dodgerBlue: '#30ACFF',
+};
