@@ -8,8 +8,6 @@ export const MapHeader = () => {
   return (
     <LinearGradient
       colors={[palette.violet, palette.dodgerBlue]}
-      // 132, 1, 255
-      // 48, 172, 255
       start={{x: 0.0, y: 1.0}}
       end={{x: 1.0, y: 1.0}}
       style={styles.headerContainer}>

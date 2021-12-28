@@ -19,7 +19,7 @@ const LONGITUDE = 72.51814;
 const LATITUDE_DELTA = 1.5;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-export const GOOGLE_MAPS_APIKEY = 'AIzaSyDJP87o4Q1TNEg8KVwI3pgUdbiZNkwA_Eo';
+export const GOOGLE_MAPS_APIKEY = 'XXXXXXXXXXXXXXXXXXXXXXXX'; //// Replace your API Key Here...
 
 export interface Places {
   name: string;
