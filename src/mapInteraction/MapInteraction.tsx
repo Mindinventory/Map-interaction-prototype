@@ -148,7 +148,6 @@ export const MapInteraction = (props: {arrPlaces: Array<Places>}) => {
           renderItem={({item}) => (
             <MapItem
               displayData={item.name}
-              displayData1=""
               onPress={() => {
                 animateToRandomBearing(item);
               }}

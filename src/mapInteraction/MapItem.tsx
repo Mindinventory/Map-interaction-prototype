@@ -4,7 +4,6 @@ import {styles} from './styles';
 
 export const MapItem = (props: {
   displayData: string;
-  displayData1: string;
   onPress: Function;
   height?: number | 0;
 }) => {
@@ -22,9 +21,7 @@ export const MapItem = (props: {
           />
 
           <View style={styles.itemContainer2}>
-            <Text style={styles.itemLabel}>
-              {props.displayData1 + props.displayData}
-            </Text>
+            <Text style={styles.itemLabel}>{props.displayData}</Text>
             <Text style={styles.review}>306 Review</Text>
           </View>
         </View>
